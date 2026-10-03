@@ -2,3 +2,8 @@ node_modules
 .pnpm-store
 dist
 .DS_Store
+
+# Product briefs, learning notes, and visual reference material stay local.
+*.md
+docs/
+sample-Potion Lab_ Magical Brewing Interface.png
