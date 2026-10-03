@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="potion" cx="50%" cy="35%"><stop stop-color="#d7c2ff"/><stop offset=".35" stop-color="#8b6ccf"/><stop offset="1" stop-color="#1c2156"/></radialGradient>
+    <linearGradient id="glass" x1="0" x2="1"><stop stop-color="#eaf4ff" stop-opacity=".75"/><stop offset=".48" stop-color="#b5cbdf" stop-opacity=".15"/><stop offset="1" stop-color="#8aa6ca" stop-opacity=".45"/></linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="#090a0f"/>
+  <circle cx="256" cy="256" r="202" fill="#17151a"/>
+  <path d="M151 165h210v44c0 24 44 39 44 105 0 91-66 131-149 131S107 405 107 314c0-66 44-81 44-105z" fill="url(#glass)" stroke="#dcecff" stroke-opacity=".72" stroke-width="10"/>
+  <ellipse cx="256" cy="164" rx="108" ry="25" fill="#111426" stroke="#dcecff" stroke-opacity=".78" stroke-width="10"/>
+  <path d="M118 309c18-23 61-39 138-39s122 16 138 39c14 22 11 62-3 83-25 38-70 48-135 48s-110-10-135-48c-14-21-17-61-3-83z" fill="url(#potion)"/>
+  <circle cx="256" cy="330" r="37" fill="#d2b9ff" fill-opacity=".65"/>
+  <path d="M182 218c12-43 35-55 54-59" fill="none" stroke="#fff" stroke-opacity=".55" stroke-linecap="round" stroke-width="15"/>
+</svg>
