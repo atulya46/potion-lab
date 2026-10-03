@@ -1,14 +1,15 @@
 import type { PotionStage } from '../../game/state/potion'
+import type { IngredientId } from '../../game/recipes/calmElixir'
 
-type PotionVesselProps = { stage: PotionStage; onDrop: () => void }
+type PotionVesselProps = { stage: PotionStage; lastIngredient?: IngredientId; onDrop: (id: IngredientId) => void }
 
-export function PotionVessel({ stage, onDrop }: PotionVesselProps) {
+export function PotionVessel({ stage, lastIngredient, onDrop }: PotionVesselProps) {
   return (
     <div
-      className={`vessel-zone ${stage}`}
-      aria-label="Potion vessel. Drop lavender here."
+      className={`vessel-zone ${stage} ${lastIngredient ? `reaction-${lastIngredient}` : ''}`}
+      aria-label="Potion vessel. Drop the next ingredient here."
       onDragOver={(event) => event.preventDefault()}
-      onDrop={(event) => { event.preventDefault(); onDrop() }}
+      onDrop={(event) => { event.preventDefault(); onDrop(event.dataTransfer.getData('text/plain') as IngredientId) }}
     >
       <div className="vessel-shadow" />
       <div className="vessel">

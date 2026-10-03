@@ -1,20 +1,32 @@
+import { calmElixirOrder, type IngredientId } from '../recipes/calmElixir'
+
 export type PotionStage = 'awaiting-ingredient' | 'adding' | 'reacting' | 'ready'
 
 export type PotionState = {
   stage: PotionStage
-  lavenderAdded: boolean
+  addedIngredients: IngredientId[]
+  lastIngredient?: IngredientId
 }
 
 export const initialPotionState: PotionState = {
   stage: 'awaiting-ingredient',
-  lavenderAdded: false,
+  addedIngredients: [],
 }
 
-export function addLavender(state: PotionState): PotionState {
-  if (state.lavenderAdded) return state
-  return { ...state, stage: 'adding', lavenderAdded: true }
+export function nextIngredient(state: PotionState): IngredientId | undefined {
+  return calmElixirOrder[state.addedIngredients.length]
+}
+
+export function canAddIngredient(state: PotionState, id: IngredientId): boolean {
+  return state.stage === 'awaiting-ingredient' && nextIngredient(state) === id
+}
+
+export function addIngredient(state: PotionState, id: IngredientId): PotionState {
+  if (!canAddIngredient(state, id)) return state
+  return { stage: 'adding', addedIngredients: [...state.addedIngredients, id], lastIngredient: id }
 }
 
 export function finishReaction(state: PotionState): PotionState {
-  return state.lavenderAdded ? { ...state, stage: 'ready' } : state
+  if (state.stage !== 'reacting') return state
+  return { ...state, stage: state.addedIngredients.length === calmElixirOrder.length ? 'ready' : 'awaiting-ingredient' }
 }
