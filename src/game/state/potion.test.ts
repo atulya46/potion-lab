@@ -12,4 +12,15 @@ describe('potion state', () => {
   it('does not complete an empty potion', () => {
     expect(finishReaction(initialPotionState)).toEqual(initialPotionState)
   })
+  it('completes Calm Elixir after all five ordered reactions settle', () => {
+    const addAndSettle = (state: typeof initialPotionState, id: Parameters<typeof addIngredient>[1]) => {
+      const adding = addIngredient(state, id)
+      return finishReaction({ ...adding, stage: 'reacting' })
+    }
+    const withLavender = addAndSettle(initialPotionState, 'lavender')
+    const withPetal = addAndSettle(withLavender, 'moon-petal')
+    const withDewdrop = addAndSettle(withPetal, 'dewdrop')
+    const withMoss = addAndSettle(withDewdrop, 'dream-moss')
+    expect(addAndSettle(withMoss, 'mist-crystal').stage).toBe('ready')
+  })
 })
